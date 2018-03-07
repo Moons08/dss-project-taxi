@@ -20,6 +20,8 @@ def erase_outlier_np(result, data, total_feature, category=False):
 
     need to import numpy as np
     """
+    import numpy as np
+
     influence = result.get_influence()
 
     if category:
@@ -38,7 +40,6 @@ def erase_outlier_np(result, data, total_feature, category=False):
     return data
 
 def haversine_np(lon1, lat1, lon2, lat2):
-    import numpy as np
     """
     Calculate the great circle distance between two points
     on the earth (specified in decimal degrees)
@@ -46,7 +47,8 @@ def haversine_np(lon1, lat1, lon2, lat2):
     All args must be of equal length.
 
     """
-
+    import numpy as np
+    
     lon1, lat1, lon2, lat2 = map(np.radians, [lon1, lat1, lon2, lat2])
 
     dlon = lon2 - lon1
