@@ -1,11 +1,18 @@
-def get_features(data, start_num=0, end_num=None):
+def get_features(data, start_num=0, end_num=None, scale=False):
     """
     from data, choose the columns to use OLS
     (default is all columns)
 
     """
     features = list(data.columns)[start_num:end_num]
-    feature_n, features = len(features), " + ".join(features)
+    feature_n = len(features)
+
+    if scale:
+        features = list(map(lambda x: "scale({})".format(x), features))
+        features = " + ".join(features)
+
+    else:
+        features = " + ".join(features)
 
     return feature_n, features
 
