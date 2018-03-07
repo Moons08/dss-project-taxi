@@ -25,9 +25,9 @@ def erase_outlier_np(result, data, total_feature, category=False):
     influence = result.get_influence()
 
     if category:
-        fox_cr = 4 / (len(data) - (total_feature) -1)
+        fox_cr = 4 / (len(data) - total_feature)
     else:
-        fox_cr = 4 / (len(data) - (total_feature + 1) - 1)
+        fox_cr = 4 / (len(data) - total_feature - 1)
 
     cooks_d2, pvals = influence.cooks_distance
     idx = np.where(cooks_d2 > fox_cr)[0]
@@ -48,7 +48,7 @@ def haversine_np(lon1, lat1, lon2, lat2):
 
     """
     import numpy as np
-    
+
     lon1, lat1, lon2, lat2 = map(np.radians, [lon1, lat1, lon2, lat2])
 
     dlon = lon2 - lon1
