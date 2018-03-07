@@ -38,6 +38,7 @@ def erase_outlier_np(result, data, total_feature, category=False):
     return data
 
 def haversine_np(lon1, lat1, lon2, lat2):
+    import numpy as np
     """
     Calculate the great circle distance between two points
     on the earth (specified in decimal degrees)
