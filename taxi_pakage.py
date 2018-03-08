@@ -16,16 +16,13 @@ def get_features(data, start_num=0, end_num=None, scale=False):
 
     return feature_n, features
 
-def erase_outlier_np(result, data, total_feature, category=False):
+def erase_outlier_np(result, data, total_feature, category=False, dropped=False):
     """
-    get the fitted model result,
-    then erase outliers in data,
+    get the fitted model result, then erase outliers in data,
     by Fox' Outlier Recommendation.
 
     print the number of erased outlier
-    return arranged data
-
-    need to import numpy as np
+    return arranged data, dropped data(when True)
     """
     import numpy as np
 
@@ -39,10 +36,13 @@ def erase_outlier_np(result, data, total_feature, category=False):
     cooks_d2, pvals = influence.cooks_distance
     idx = np.where(cooks_d2 > fox_cr)[0]
 
+    dropped_data = data.loc[idx]
     data = data.drop(idx)
     data.reset_index(drop=True, inplace=True)
 
-    print(len(idx))
+    if dropped:
+
+        return data, dropped_data
 
     return data
 
