@@ -21,29 +21,29 @@ def date_to_zero(x):
 def time_to_zero(x):
     return int((x-datezero).seconds)
 def week_num(x):
-    return int(x.weekday())
+    return int(x.weekday()) + 1 # erase 0
 
 us_holidays = holidays.US(state='NY', years=2016)
 
 def holiday(x):
     if x in us_holidays:
-        return 1
+        return 2
     else:
         x = x.weekday()
     if x > 4:
         return 1
     else:
-        return 0
+        return 1
 
 def holiday_Fri(x): #with Friday
     if x in us_holidays:
-        return 1
+        return 2
     else:
         x = x.weekday()
     if x > 3:
         return 1
     else:
-        return 0
+        return 1
 
 
 taxi = pd.read_csv('train.csv')
