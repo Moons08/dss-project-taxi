@@ -55,8 +55,8 @@ def erase_outlier_np(result, data, total_feature, category=False, dropped=False)
     cooks_d2, pvals = influence.cooks_distance
     idx = np.where(cooks_d2 > fox_cr)[0]
 
-    dropped_data = data.loc[idx]
-    data = data.drop(idx)
+    dropped_data = data.iloc[idx]
+    data.drop(data.index[idx])
     data.reset_index(drop=True, inplace=True)
 
     if dropped:
