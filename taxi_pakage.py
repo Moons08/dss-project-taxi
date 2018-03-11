@@ -36,21 +36,20 @@ def get_features(data, start_num=0, end_num=None, scale=False):
 
     return feature_n, features
 
-def erase_outlier_np(result, data, total_feature, category=False, dropped=False):
+def erase_outlier_np(result, data, category=False, dropped=False):
     """
     get the fitted model result, then erase outliers in data,
     by Fox' Outlier Recommendation.
 
-    print the number of erased outlier
     return arranged data, dropped data(when True)
     """
 
     influence = result.get_influence()
 
     if category:
-        fox_cr = 4 / (len(data) - total_feature)
+        fox_cr = 4 / (len(data) - result.df_model + 1)
     else:
-        fox_cr = 4 / (len(data) - total_feature - 1)
+        fox_cr = 4 / (len(data) - result.df_model)
 
     cooks_d2, pvals = influence.cooks_distance
     idx = np.where(cooks_d2 > fox_cr)[0]
