@@ -5,6 +5,7 @@ import scipy as sp
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 import statsmodels.stats.api as sms
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 import sklearn as sk
 
 import datetime as dt
@@ -12,7 +13,6 @@ from patsy import dmatrix
 
 import matplotlib.pylab as plt
 from mpl_toolkits.mplot3d import Axes3D
-
 import seaborn as sns
 sns.set()
 sns.set_style("whitegrid")
