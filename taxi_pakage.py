@@ -115,7 +115,7 @@ def RMSLE(prediction, real):
     score = np.sqrt(1/len(real) *np.sum(logarithmic_error**2))
     return score
 
-def cross_validater(formular, dataset, times, shuffle=True, r_seed=0):
+def cross_validater(formula, dataset, times, shuffle=True, r_seed=0):
 
     score_set = []
     result_sets = pd.DataFrame(
@@ -130,9 +130,9 @@ def cross_validater(formular, dataset, times, shuffle=True, r_seed=0):
         cv = KFold(n_splits=times, shuffle=True, random_state=r_seed)
 
     for i, (train_index, test_index) in enumerate(cv.split(dataset)):
-        model =  sm.OLS.from_formula(formular, dataset.iloc[train_index])
+        model =  sm.OLS.from_formula(formula, dataset.iloc[train_index])
         result = model.fit()
-        storage(result, result_sets, formular)
+        storage(result, result_sets, formula)
         prediction = result.predict(dataset.iloc[test_index])
         real = dataset['trip_duration'].iloc[test_index]
         score_set.append(RMSLE(prediction, real))
