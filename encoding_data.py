@@ -27,24 +27,13 @@ us_holidays = holidays.US(state='NY', years=2016)
 
 def holiday(x):
     if x in us_holidays:
-        return 2
+        return 1
     else:
         x = x.weekday()
     if x > 4:
-        return 1
+        return 0
     else:
-        return 1
-
-def holiday_Fri(x): #with Friday
-    if x in us_holidays:
-        return 2
-    else:
-        x = x.weekday()
-    if x > 3:
-        return 1
-    else:
-        return 1
-
+        return 0
 
 taxi = pd.read_csv('train.csv')
 taxi['dist'] = haversine_np(taxi['pickup_longitude'], taxi['pickup_latitude'], taxi['dropoff_longitude'], taxi['dropoff_latitude'])
