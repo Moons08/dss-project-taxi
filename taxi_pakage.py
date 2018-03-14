@@ -23,20 +23,21 @@ sns.set()
 sns.set_style("whitegrid")
 sns.set_color_codes(palette="muted")
 
-datezero = dt.datetime(2016, 1, 1, 0, 0, 1) # 기준
 
 def strptime(x):
     return dt.datetime.strptime(x, "%Y-%m-%d %H:%M:%S")
 def date_to_zero(x):
+    datezero = dt.datetime(2016, 1, 1, 0, 0, 1) # 기준
     return int((x-datezero).days)
 def time_to_zero(x):
+    datezero = dt.datetime(2016, 1, 1, 0, 0, 1) # 기준
     return int((x-datezero).seconds)
 def week_num(x):
     return int(x.weekday()) + 1 # erase 0
 
-us_holidays = holidays.US(state='NY', years=2016)
 
 def holiday(x):
+    us_holidays = holidays.US(state='NY', years=2016)
     if x in us_holidays:
         return 1
     else:
