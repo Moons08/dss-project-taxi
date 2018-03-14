@@ -158,7 +158,7 @@ def cross_validater(formula, dataset, times, target_log=False, shuffle=True, r_s
         result = model.fit()
         storage(result, result_sets, formula)
 
-        if target_log = True:
+        if target_log:
             prediction = np.exp(result.predict(dataset.iloc[test_index]))
         else:
             prediction = result.predict(dataset.iloc[test_index])
