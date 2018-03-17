@@ -40,19 +40,27 @@ taxi['dist'] = haversine_np(taxi['pickup_longitude'], taxi['pickup_latitude'], t
 
 taxi['id'] = taxi['id'].apply(lambda x: x[2:])
 taxi['store_and_fwd_flag'] = taxi['store_and_fwd_flag'].apply(lambda x: 0 if x == 'N' else 1)
+
+taxi['pickup_datetime2'] = taxi['pickup_datetime'].astype('datetime64[ns]')
+taxi['dropoff_datetime2'] = taxi['dropoff_datetime'].astype('datetime64[ns]')
+taxi["year"] = taxi['pickup_datetime2'].dt.year
+taxi["month"] = taxi['pickup_datetime2'].dt.month
+taxi["day"] = taxi['pickup_datetime2'].dt.day
+taxi["hour"] = taxi['pickup_datetime2'].dt.hour
+
 taxi['pickup_datetime'] = taxi['pickup_datetime'].apply(strptime)
 taxi['dropoff_datetime'] = taxi['dropoff_datetime'].apply(strptime)
 taxi['pick_date'] = taxi['pickup_datetime'].apply(date_to_zero)
 taxi['pick_time'] = taxi['pickup_datetime'].apply(time_to_zero)
-taxi['drop_time'] = taxi['dropoff_datetime'].apply(time_to_zero)
 
 taxi['holiday'] = taxi['pickup_datetime'].apply(holiday)
-taxi['holiday_Fri'] = taxi['pickup_datetime'].apply(holiday_Fri)
 taxi['weekday'] = taxi['pickup_datetime'].apply(week_num)
 
 
 temp = taxi['trip_duration'] # for easy slicing
-taxi = taxi.drop(['pickup_datetime', 'dropoff_datetime', 'trip_duration'], axis=1)
+
+taxi = taxi.drop(['pickup_datetime', 'dropoff_datetime', 'pickup_datetime2', 'dropoff_datetime2', 'trip_duration'], axis=1)
+
 taxi['trip_duration'] = temp
 
 taxi.to_csv("edited_taxi.csv", index = False)
